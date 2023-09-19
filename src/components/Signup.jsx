@@ -1,8 +1,8 @@
 import React from "react";
-import "./Signup.css";
 import Input from "./Input";
+import axios from "axios";
 
-const Signup = () => {
+const Signup = ({values, setValues}) => {
 
   const inputs = [
     {
@@ -55,30 +55,22 @@ const Signup = () => {
       name: "confirmPassword"
     }
   ]
+
+  const handleSubmit = async() => {
+    const res = await axios.post("http://localhost:8080/signup", )
+  }
+
   return (
-    <div>
+    <div className="wrapper">
+      <h1 className="title">Divum Employee Details</h1>
       <form className="form">
         <p id="heading">Register</p>
         {inputs.map((data) => (
-          <Input key={data.id} {...data} />
+          <Input key={data.id} name={data.name} {...data} values={values} setValues={setValues} />
         ))}
-        {/* <div className="field">
-          <input
-            autoComplete="off"
-            placeholder="Username"
-            className="input-field"
-            type="text"
-          />
-        </div>
-        <div className="field">
-          <input
-            placeholder="Password"
-            className="input-field"
-            type="password"
-          />
-        </div> */}
+        
         <div className="btn">
-          <button className="button2">Sign Up</button>
+          <button className="button2" onClick={()=>handleSubmit()}>Sign Up</button>
         </div>
       </form>
     </div>

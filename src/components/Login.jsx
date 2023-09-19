@@ -1,34 +1,32 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Input from "./Input";
-import "./Login.css";
 
 const Login = () => {
   const inputs = [
     {
       id: 1,
-      type: "text",
-      className: "input-field firstName",
-      placeholder: "First Name ...",
+      type: "email",
+      className: "input-field email",
+      placeholder: "email ...",
     },
     {
       id: 2,
       type: "text",
       className: "input-field password",
-      placeholder: "email ...",
+      placeholder: "password ...",
     },
   ];
   return (
-    <div>
+    <div className="wrapper">
+      <h1 className="title">Divum Employee Details</h1>
       <form className="form">
         <p id="heading">Login</p>
         {inputs.map((data) => (
-          <Input key={data.id} {...data} />
+          <Input key={data.id} {...data} error={data.error} />
         ))}
         <div className="btn">
-          <button className="button1">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Login&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          </button>
+          <button className="button1">Login</button>
           <Link to="/signup">
             <button className="button2">Sign Up</button>
           </Link>

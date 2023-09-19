@@ -5,47 +5,77 @@ $background-color_1: #171717;
 $background-color_2: #252525;
 $background-color_3: black;
 $background-color_4: red;
+$background-color_5: rgb(50, 50, 50);
 
-.form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding-left: 2em;
-  padding-right: 2em;
-  padding-bottom: 0.4em;
-  background-color: $background-color_1;
-  border-radius: 25px;
-  transition: 0.4s ease-in-out;
-  &:hover {
-    transform: scale(1.05);
-    border: 1px solid black;
-  }
-  .btn {
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-    margin-top: 2.5em;
-  }
+body {
+  width: 20%;
+  margin: auto;
+  position: relative;
+  top: 150px;
+  background-color: rgb(34, 32, 32);
 }
-#heading {
+
+h1 {
+  color: gray;
   text-align: center;
-  margin: 2em;
-  color: $color_1;
-  font-size: 1.2em;
 }
-.field {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5em;
-  border-radius: 25px;
-  padding: 0.6em;
-  border: none;
-  outline: none;
-  color: $color_2;
-  background-color: $background-color_1;
-  box-shadow: inset 2px 5px 10px rgb(5, 5, 5);
+
+.wrapper {
+  max-width: 400px;
+  min-width: 400px;
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-left: 2em;
+    padding-right: 2em;
+    padding-bottom: 0.4em;
+    background-color: $background-color_1;
+    border-radius: 25px;
+    transition: 0.4s ease-in-out;
+    &:hover {
+      transform: scale(1.05);
+      border: 1px solid black;
+    }
+    .btn {
+      display: flex;
+      justify-content: center;
+      flex-direction: row;
+      margin-top: 2.5em;
+      margin-bottom: 1.4em;
+    }
+  }
+  #heading {
+    text-align: center;
+    margin: 2em;
+    color: $color_1;
+    font-size: 1.2em;
+  }
+  .input-wrapper {
+    .field {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5em;
+      border-radius: 25px;
+      padding: 0.6em;
+      border: none;
+      outline: none;
+      color: $color_2;
+      font-size: 24px;
+      background-color: $background-color_1;
+      box-shadow: inset 2px 5px 10px rgb(54, 52, 52);
+    }
+
+    p {
+      margin: 0px 5px;
+      font-size: 16px;
+      color: $background-color_4;
+    }
+  }
 }
+
 .input-icon {
   height: 1.3em;
   width: 1.3em;
@@ -59,6 +89,7 @@ $background-color_4: red;
   color: $color_3;
 }
 .button1 {
+  width: 100px;
   padding: 0.5em;
   padding-left: 1.1em;
   padding-right: 1.1em;
