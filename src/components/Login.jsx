@@ -9,12 +9,14 @@ const Login = () => {
       type: "email",
       className: "input-field email",
       placeholder: "email ...",
+      name: "email",
     },
     {
       id: 2,
       type: "text",
       className: "input-field password",
       placeholder: "password ...",
+      name: "password",
     },
   ];
   return (
@@ -23,7 +25,7 @@ const Login = () => {
       <form className="form">
         <p id="heading">Login</p>
         {inputs.map((data) => (
-          <Input key={data.id} {...data} error={data.error} />
+          <Input key={data.id} name={data.name} data={data} />
         ))}
         <div className="btn">
           <button className="button1">Login</button>

@@ -66,7 +66,7 @@ const Signup = ({values, setValues}) => {
       <form className="form">
         <p id="heading">Register</p>
         {inputs.map((data) => (
-          <Input key={data.id} name={data.name} {...data} values={values} setValues={setValues} />
+          <Input key={data.id} name={data.name} data={data} values={values} setValues={setValues} />
         ))}
         
         <div className="btn">
