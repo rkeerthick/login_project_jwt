@@ -66,6 +66,15 @@ h1 {
       font-size: 24px;
       background-color: $background-color_1;
       box-shadow: inset 2px 5px 10px rgb(54, 52, 52);
+
+
+      input {
+        background-color: $background-color_5;
+        border: none;
+        outline: none;
+        padding: 5px;
+        border-radius: 10px;
+      }
     }
 
     p {
