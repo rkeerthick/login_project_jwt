@@ -34,3 +34,11 @@ button {
     margin-top: 15px;
     margin-bottom: 30px;
 }
+
+.login-signin {
+    margin-bottom: 10px;
+}
+
+.login-signup {
+    margin-top: 0px;
+}

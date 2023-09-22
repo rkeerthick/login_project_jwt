@@ -13,6 +13,16 @@ export const DataContextProvider = ({children}) => {
     confirmPassword: "",
   });
 
+  const [error, setError] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    dob: "",
+    phoneNumber: "",
+    password: "",
+    confirmPassword: "",
+  });
+
   const headers = {
     Authorization: "Bearer " + localStorage.getItem("userToken"),
   };
@@ -21,7 +31,7 @@ export const DataContextProvider = ({children}) => {
 
   return (
     <DataContext.Provider value={{
-      values, setValues, headers
+      values, setValues, error, setError, headers
     }}>
         {children}
     </DataContext.Provider>

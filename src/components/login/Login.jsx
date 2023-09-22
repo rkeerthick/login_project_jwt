@@ -1,13 +1,12 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Input from "../input/Input";
 import axios from "axios";
 import { useContext } from "react";
 import { DataContext } from "../../context/DataContext";
 
-
 const Login = () => {
-  const { values, setValues } = useContext(DataContext)
+  const { values, setValues } = useContext(DataContext);
   const navigate = useNavigate();
 
   const inputs = [
@@ -18,6 +17,8 @@ const Login = () => {
       placeholder: "email ...",
       name: "email",
       value: values.email,
+      pattern: "^[w-.]+@([w-]+.)+[w-]{2,4}$",
+      error: "Invalid email",
       onChange: (e) => setValues({ ...values, email: e.target.value }),
     },
     {
@@ -32,29 +33,36 @@ const Login = () => {
   ];
 
   const handleClick = async (e) => {
-    e.preventDefault();
-    const res = await axios.post("http://localhost:8080/auth/getUser", values);
-    localStorage.setItem("userToken", res.data);
+    {
+      e.preventDefault();
+      const res = await axios.post(
+        "http://localhost:8080/auth/getUser",
+        values
+      );
+      console.log(res, "res");
+      localStorage.setItem("userToken", res.data);
 
-    if (res.data !== "email not found") {
       if (values.email === "admin@gmail.com")
         navigate("/table", { replace: true });
-      else
-      {
-        const res1 = await axios.get(
-          "http://localhost:8080/auth/getUserEmail/"+values.email
-        );
+      else {
+        if (res.data === "email not found" || res.data === "Invalid Password") {
+          alert(res.data);
+        } else {
+          const res1 = await axios.get(
+            "http://localhost:8080/auth/getUserEmail/" + values.email
+          );
 
-        setValues({
-          email: res1.data.email,
-          firstName: res1.data.firstName,
-          lastName: res1.data.lastName,
-          phoneNumber: res1.data.phoneNumber,
-          dob: res1.data.dob
-        });
-        console.log(res1.data, "res1");
-        navigate("/signup", { replace: true });
-      } 
+          setValues({
+            email: res1.data.email,
+            firstName: res1.data.firstName,
+            lastName: res1.data.lastName,
+            phoneNumber: res1.data.phoneNumber,
+            dob: res1.data.dob,
+          });
+          console.log(res1.data, "res1");
+          navigate("/signup", { replace: true });
+        }
+      }
     }
 
     // console.log(res, "response");
@@ -79,7 +87,10 @@ const Login = () => {
             handleChange={handleChange}
           />
         ))}
-        <button>Submit</button>
+        <button className="login-signin">Submit</button>
+        <Link to="/signup">
+          <button className="login-signup">Sign Up</button>
+        </Link>
       </form>
     </div>
   );

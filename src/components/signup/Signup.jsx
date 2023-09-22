@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Input from "../input/Input";
 import axios from "axios";
 import { useContext } from "react";
@@ -6,6 +6,12 @@ import { DataContext } from "../../context/DataContext";
 
 const Signup = () => {
   const { values, setValues, headers } = useContext(DataContext);
+
+  const [update, setUpdate] = useState(true);
+
+  useEffect(() => {
+    if(values.email === '')setUpdate(!update);
+  }, [])
 
   const inputs = [
     {
@@ -100,6 +106,7 @@ const Signup = () => {
       className: "input-field email",
       name: "email",
       value: values.email,
+      readOnly: update ? "true" : "false",
       onChange: (e) => setValues({ ...values, email: e.target.value }),
     },
     {
@@ -126,8 +133,12 @@ const Signup = () => {
     e.preventDefault();
     console.log(values, 'values');
     const res = await axios.put("http://localhost:8080/auth/update", values, {headers});
-    console.log(res, 'update');
+    if (res.data === "successfully updated")
+      alert(res.data);
+    console.log(res, "update");
   }
+
+  console.log(update, 'update');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -136,6 +147,11 @@ const Signup = () => {
       values
     );
     localStorage.setItem("userToken", res.data);
+    if (res.data !== "User already exists") {
+      alert("user successfully added");
+      setUpdate(!update)
+    }
+     console.log(res.data, "token");
   };
 
   const handleChange = (e) => {
@@ -145,34 +161,34 @@ const Signup = () => {
   return (
     <div className="App">
       <form>
-        {values.email === "" ? (
+        {!update ? (
           <h1>Sign Up</h1>
         ) : (
           <h1>Update {values.firstName}</h1>
         )}
-        {values.email === "" 
-        ? inputs.map((input) => (
-        <Input
-          key={input.id}
-          name={input.name}
-          onChange={input.onChange}
-          {...input}
-          value={values[input.name]}
-          handleChange={handleChange}
-        />))
-        : inputs1.map((input) => (
-        <Input
-          key={input.id}
-          name={input.name}
-          onChange={input.onChange}
-          {...input}
-          value={values[input.name]}
-          handleChange={handleChange}
-        />))
-      }
-        
-        
-        {values.email === "" ? (
+        {!update
+          ? inputs.map((input) => (
+              <Input
+                key={input.id}
+                name={input.name}
+                onChange={input.onChange}
+                {...input}
+                value={values[input.name]}
+                handleChange={handleChange}
+              />
+            ))
+          : inputs1.map((input) => (
+              <Input
+                key={input.id}
+                name={input.name}
+                onChange={input.onChange}
+                {...input}
+                value={values[input.name]}
+                handleChange={handleChange}
+              />
+            ))}
+
+        {!update ? (
           <button onClick={handleSubmit}>Submit</button>
         ) : (
           <button onClick={handleUpdate}>Update</button>
